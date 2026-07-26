@@ -15,7 +15,7 @@ Read `docs/PRODUCT.md` first. This file is how, that file is why.
 ## Commands
 
 - `npm test` - vitest
-- `npx vitest run server/week.test.ts` - a single test file
+- `npx vitest run backend/week.test.ts` - a single test file
 - `npm run typecheck` - tsc, no emit
 - `npm run db:reset` - drop and rebuild the index from disk
 

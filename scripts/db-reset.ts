@@ -1,8 +1,8 @@
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { loadConfig, resolveDataDir } from "../server/config.js";
-import { openDb } from "../server/db/open.js";
-import { RebuildFailed, rebuild } from "../server/store/reindex.js";
+import { loadConfig, resolveDataDir } from "../backend/config.js";
+import { openDb } from "../backend/db/open.js";
+import { RebuildFailed, rebuild } from "../backend/store/reindex.js";
 
 /**
  * Drops the index and rebuilds it from disk.

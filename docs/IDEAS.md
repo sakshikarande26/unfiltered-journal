@@ -119,7 +119,7 @@ already knows all of it. The private surface gets to be the honest one.
 ### Settled
 
 - **Block count comes from the ISO week-year, never a hardcoded 52.** 2026 has
-  53 ISO weeks; 2025 has 52. `parseWeekId` in `server/week.ts` already knows
+  53 ISO weeks; 2025 has 52. `parseWeekId` in `backend/week.ts` already knows
   which, so the count is derived and the layout has to survive the extra block
   rather than assume it away.
 - **Calendar year, not a rolling window and not an anniversary year anchored to
