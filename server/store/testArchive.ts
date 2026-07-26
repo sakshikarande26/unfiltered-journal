@@ -8,6 +8,7 @@ import type {
   WeekId,
 } from "../../shared/types.js";
 import { emptyProgress } from "../../shared/types.js";
+import { assertNotRealArchive } from "../config.js";
 import {
   entryJsonPath,
   goalPhotosDir,
@@ -25,6 +26,7 @@ import {
  */
 export function makeArchiveDir(): string {
   const dir = mkdtempSync(join(tmpdir(), "tuj-"));
+  assertNotRealArchive(dir);
   mkdirSync(join(dir, "entries"), { recursive: true });
   return dir;
 }

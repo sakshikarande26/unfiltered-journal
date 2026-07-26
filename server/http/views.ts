@@ -82,6 +82,7 @@ export function entrySummary(
     title: entry.title,
     description: entry.description,
     cover: photos[0] ?? null,
+    photos,
     publishedAt: entry.publishedAt,
     pinned: progress.pinned,
     archived: progress.archived,
@@ -102,7 +103,6 @@ export function entryDetail(
     ...entrySummary(weekId, entry, goals, progress, tz, now),
     liked: entry.liked,
     challenging: entry.challenging,
-    photos: photoViews(weekId, entry),
   };
 }
 

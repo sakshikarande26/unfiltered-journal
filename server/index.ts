@@ -1,12 +1,12 @@
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { loadConfig } from "./config.js";
+import { loadConfig, resolveDataDir } from "./config.js";
 import { openDb } from "./db/open.js";
 import { buildApp } from "./http/app.js";
 import { rebuild } from "./store/reindex.js";
 
 const root = process.cwd();
-const dataDir = join(root, "data");
+const dataDir = resolveDataDir();
 mkdirSync(join(dataDir, "entries"), { recursive: true });
 
 const { journalTz } = loadConfig(root);

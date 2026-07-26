@@ -18,9 +18,9 @@ algorithm.
 - Local-first: your archive is a folder of files you own, SQLite is just a
   rebuildable index
 
-## Start here
+<!-- ## Start here
 
 - Clone the repo and run `npm install`
 - `npm run dev` — server and client
 - `npm run test` — the rules of the product, as tests
-- `npm run db:reset` — rebuild the index from your archive
+- `npm run db:reset` — rebuild the index from your archive -->

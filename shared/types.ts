@@ -147,6 +147,8 @@ export interface EntrySummary {
   title: string;
   description: string;
   cover: PhotoView | null;
+  /** Ordered, index 0 is the cover. Powers the card's layered photo stack. */
+  photos: PhotoView[];
   publishedAt: string | null;
   pinned: boolean;
   archived: boolean;
@@ -157,7 +159,6 @@ export interface EntrySummary {
 export interface EntryDetail extends EntrySummary {
   liked: string;
   challenging: string;
-  photos: PhotoView[];
 }
 
 /** A single goal as its owner sees it. Never appears inside EntrySummary or

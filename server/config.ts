@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { homedir } from "node:os";
+import { join, resolve } from "node:path";
 import { z } from "zod";
 import { DateTime } from "luxon";
 
@@ -34,4 +35,29 @@ export function loadConfig(root: string): Config {
     return seeded;
   }
   return configSchema.parse(JSON.parse(readFileSync(path, "utf8")));
+}
+
+/**
+ * Where the real archive lives. Never inside the repo: a `rm -rf`, `git
+ * clean`, or careless script running from the project directory should not
+ * be able to reach it.
+ */
+export function resolveDataDir(env: NodeJS.ProcessEnv = process.env): string {
+  return env.TUJ_DATA_DIR ?? join(homedir(), ".the-unfiltered-journal");
+}
+
+/**
+ * Throws if `dir` resolves to the real archive path. Called by anything that
+ * builds a throwaway archive (tests, future seeding scripts) so a bug that
+ * accidentally points a scratch helper at production fails loudly instead of
+ * writing into someone's real journal.
+ */
+export function assertNotRealArchive(dir: string): void {
+  const real = resolve(resolveDataDir());
+  if (resolve(dir) === real) {
+    throw new Error(
+      `Refusing to use the real archive (${real}) as a throwaway directory. ` +
+        "Tests and seeding must use an isolated directory.",
+    );
+  }
 }

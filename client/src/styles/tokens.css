@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Display";
+  src: local("Georgia");
+}
+
+:root {
+  --font-display: "Display", Georgia, serif;
+  --font-body: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --color-paper: #faf6ee;
+  --color-ink: #2a2622;
+  --color-accent: #8a5a3c;
+  --radius-paper: 3px;
+  --shadow-paper: 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: normal;
+}

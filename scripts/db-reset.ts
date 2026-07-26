@@ -1,6 +1,6 @@
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { loadConfig } from "../server/config.js";
+import { loadConfig, resolveDataDir } from "../server/config.js";
 import { openDb } from "../server/db/open.js";
 import { RebuildFailed, rebuild } from "../server/store/reindex.js";
 
@@ -11,7 +11,7 @@ import { RebuildFailed, rebuild } from "../server/store/reindex.js";
  * of whether the filesystem is really the source of truth.
  */
 const root = process.cwd();
-const dataDir = join(root, "data");
+const dataDir = resolveDataDir();
 const dbPath = join(dataDir, "index.db");
 
 mkdirSync(join(dataDir, "entries"), { recursive: true });
