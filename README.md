@@ -1,9 +1,6 @@
 ![the-unfiltered-journal banner](./assets/banner.png)
-# the-unfiltered-journal
 
-**A weekly photo journal that turns your goals into proof.**
-
-the-unfiltered-journal is a local-first journal you post to once a week. Five
+A local-first journal you post to once a week. Five
 photos, a few honest words, up to five private goals. No edits, no deletes, no
 algorithm.
 
