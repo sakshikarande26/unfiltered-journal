@@ -1,4 +1,4 @@
-![the-unfiltered-journal banner](./assets/banner.png)
+<!--![the-unfiltered-journal banner](./assets/banner.png)  -->
 
 A local-first journal you post to once a week. Five
 photos, a few honest words, up to five private goals. No edits, no deletes, no
