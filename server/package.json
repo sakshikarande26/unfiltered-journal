@@ -1,0 +1,17 @@
+{
+  "name": "@tuj/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fastify/multipart": "^10.1.0",
+    "@tuj/shared": "*",
+    "fastify": "^5.10.0",
+    "jose": "^6.0.0",
+    "postgres": "^3.4.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5"
+  }
+}
