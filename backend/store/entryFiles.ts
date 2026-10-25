@@ -21,7 +21,7 @@ export class EntryFileError extends Error {
   }
 }
 
-function readJson<T>(path: string, schema: z.ZodType<T>): T {
+function readJson<T>(path: string, schema: z.ZodType<T, z.ZodTypeDef, unknown>): T {
   let raw: string;
   try {
     raw = readFileSync(path, "utf8");

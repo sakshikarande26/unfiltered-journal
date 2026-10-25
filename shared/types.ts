@@ -65,6 +65,11 @@ export const goalsFileSchema = z.object({
 export const progressFileSchema = z.object({
   /** goal id -> completion instant. Absent key means not done. */
   completions: z.record(z.string(), isoInstant),
+  /** goal id -> last change instant, including toggles off. The ordering
+   *  field that lets two devices resolve the same goal last-write-wins;
+   *  keys stay here even after an un-completion removes them from
+   *  `completions`. */
+  completionChangedAt: z.record(z.string(), isoInstant).default({}),
   /** Opt-in per entry, only offerable once at least one goal is done. */
   goalsDisclosed: z.boolean(),
   pinned: z.boolean(),
@@ -79,6 +84,7 @@ export type ProgressFile = z.infer<typeof progressFileSchema>;
 
 export const emptyProgress: ProgressFile = {
   completions: {},
+  completionChangedAt: {},
   goalsDisclosed: false,
   pinned: false,
   archived: false,

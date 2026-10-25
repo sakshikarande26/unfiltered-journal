@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { weekIdPattern, type WeekId } from "../shared/types.js";
+import { weekIdPattern, type WeekId } from "./types.js";
 
 /**
  * All week logic in the app lives here. The client never computes a week id.
@@ -97,6 +97,16 @@ export function isLocked(id: WeekId, tz: string, now: Date): boolean {
 
 export function isCurrentWeek(id: WeekId, tz: string, now: Date): boolean {
   return weekIdAt(now, tz) === id;
+}
+
+/**
+ * Every ISO week id in a week-year, for the year grid. 2026 has 53 weeks,
+ * 2025 has 52 - the count is asked of the calendar, never assumed.
+ */
+export function weekIdsOfYear(weekYear: number): WeekId[] {
+  const probe = DateTime.fromObject({ weekYear, weekNumber: 1, weekday: 1 });
+  const count = probe.weeksInWeekYear;
+  return Array.from({ length: count }, (_, i) => format(weekYear, i + 1));
 }
 
 /**
