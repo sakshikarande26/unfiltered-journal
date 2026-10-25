@@ -9,7 +9,7 @@ import {
   type WeekId,
 } from "../../shared/types.js";
 import { SCHEMA_VERSION, createSchema, type Db } from "../db/open.js";
-import { parseWeekId, weekBounds } from "../week.js";
+import { parseWeekId, weekBounds } from "../../shared/week.js";
 import {
   EntryFileError,
   readEntryFile,

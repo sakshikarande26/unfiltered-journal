@@ -111,3 +111,174 @@
   font-size: 0.95rem;
   color: color-mix(in srgb, var(--color-ink) 75%, transparent);
 }
+
+/* ---- chrome ---- */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+}
+
+.site-nav__brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav__links {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 0.92rem;
+}
+
+.site-nav__links a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.site-nav__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-nav__auth {
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ink) 65%, transparent);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sync-badge {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sync-badge--idle { color: #3d7a3d; border-color: #3d7a3d55; }
+.sync-badge--syncing { color: var(--color-accent); }
+.sync-badge--error { color: #a33; border-color: #a335; }
+.sync-badge--signed-out { color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+
+/* ---- buttons + forms ---- */
+.btn {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-paper);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+}
+
+.btn:disabled { opacity: 0.5; cursor: default; }
+.btn--primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+/* ---- auth page ---- */
+.auth-page {
+  max-width: 420px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.auth-page__title { margin: 0 0 0.5rem; }
+.auth-page__lede { font-size: 0.95rem; color: color-mix(in srgb, var(--color-ink) 70%, transparent); }
+.auth-page__notice { font-size: 0.9rem; color: #3d7a3d; }
+
+.auth-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.25rem; }
+.auth-form__label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; }
+.auth-form__input, .compose__input {
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-paper);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+  background: #fff;
+  width: 100%;
+}
+.auth-form__error, .compose__error { color: #a33; font-size: 0.9rem; margin: 0; }
+.auth-form__actions { display: flex; gap: 0.75rem; }
+
+/* ---- composer ---- */
+.compose { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 6rem; }
+.compose__header { display: flex; align-items: baseline; gap: 0.75rem; }
+.compose__header h1 { margin: 0; font-size: 1.6rem; }
+.compose__notice { font-size: 0.95rem; }
+.compose__section {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: var(--radius-paper);
+  box-shadow: var(--shadow-paper);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.compose__section h2 { margin: 0; font-size: 1.1rem; }
+.compose__hint { margin: 0; font-size: 0.85rem; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
+.compose__photos { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.compose__photo { position: relative; margin: 0; width: 110px; height: 110px; }
+.compose__photo img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-paper); }
+.compose__photo-remove {
+  position: absolute; top: -6px; right: -6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: none; background: var(--color-ink); color: var(--color-paper);
+  cursor: pointer; font-size: 0.85rem; line-height: 1;
+}
+.compose__goal-remove { position: static; flex: none; }
+.compose__photo-add {
+  width: 110px; height: 110px; border-radius: var(--radius-paper);
+  border: 1px dashed color-mix(in srgb, var(--color-ink) 30%, transparent);
+  background: transparent; cursor: pointer; font-size: 0.85rem; color: inherit;
+}
+.compose__goal-row { display: flex; align-items: center; gap: 0.5rem; }
+.compose__publish { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.state-badge {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 70%, transparent);
+}
+.state-badge--published { color: #3d7a3d; border-color: #3d7a3d55; }
+.state-badge--draft { color: var(--color-accent); border-color: var(--color-accent); }
+
+/* ---- goals checklist ---- */
+.goals-checklist { margin-top: 1.5rem; }
+.goals-checklist__title { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.goals-checklist__count { font-size: 0.85rem; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
+.goals-checklist__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.goals-checklist__item { display: flex; gap: 0.6rem; align-items: baseline; cursor: pointer; }
+.goals-checklist__item.is-done span { text-decoration: line-through; color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+
+/* ---- year grid ---- */
+.year-page { max-width: 720px; margin: 0 auto; padding: 2rem 1rem 6rem; }
+.year-page__header { display: flex; align-items: baseline; justify-content: space-between; }
+.year-page__header h1 { margin: 0; font-size: 2rem; }
+.year-page__legend { display: flex; gap: 1.1rem; margin: 0.75rem 0 1.25rem; font-size: 0.8rem; color: color-mix(in srgb, var(--color-ink) 60%, transparent); align-items: center; }
+.year-page__legend .cell { display: inline-block; width: 10px; height: 10px; margin-right: 0.3rem; }
+
+.year-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+.cell { aspect-ratio: 1; border-radius: 2px; }
+.cell--filled { background: var(--color-accent); overflow: hidden; display: block; }
+.cell--filled img { width: 100%; height: 100%; object-fit: cover; }
+.cell--missed { background: color-mix(in srgb, var(--color-ink) 20%, transparent); }
+.cell--current { background: transparent; border: 2px solid var(--color-accent); }
+.cell--upcoming { background: color-mix(in srgb, var(--color-ink) 6%, transparent); }
+.year-grid__cell { text-decoration: none; }

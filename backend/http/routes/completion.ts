@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import type { WeekId } from "../../../shared/types.js";
 import { writeProgressFile } from "../../store/writeFiles.js";
-import { parseWeekId } from "../../week.js";
+import { parseWeekId } from "../../../shared/week.js";
 import { requireEntry, type Ctx } from "../context.js";
 import { ApiError } from "../errors.js";
 import { goalsOwnerView } from "../views.js";
@@ -39,6 +39,9 @@ export function completionRoutes(app: FastifyInstance, ctx: Ctx): void {
         );
       }
       const completions = { ...progress.completions };
+      const completionChangedAt = { ...progress.completionChangedAt };
+      const changedNow = ctx.now().toISOString();
+      completionChangedAt[goalId] = changedNow;
       if (completedAt === null) delete completions[goalId];
       else completions[goalId] = completedAt;
 
@@ -50,6 +53,7 @@ export function completionRoutes(app: FastifyInstance, ctx: Ctx): void {
       const next = {
         ...progress,
         completions,
+        completionChangedAt,
         goalsDisclosed: stillDisclosed,
       };
       writeProgressFile(ctx.dataDir, weekId as WeekId, next);

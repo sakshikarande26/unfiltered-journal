@@ -10,7 +10,7 @@ import {
 import { disclosureIsOfferable } from "../../state.js";
 import { entriesDir } from "../../store/paths.js";
 import { writeProgressFile } from "../../store/writeFiles.js";
-import { parseWeekId } from "../../week.js";
+import { parseWeekId } from "../../../shared/week.js";
 import { requireEntry, type Ctx } from "../context.js";
 import { ApiError } from "../errors.js";
 import { entryDetail, entrySummary, goalsOwnerView, ownerGoalView } from "../views.js";

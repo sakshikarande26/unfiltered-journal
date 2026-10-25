@@ -3,13 +3,18 @@ import multipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import { mkdirSync } from "node:fs";
 import { entriesDir } from "../store/paths.js";
+import type { AuthClient } from "../auth/client.js";
+import type { SyncEngine } from "../sync/engine.js";
 import { makeCtx, type AppOptions, type Ctx } from "./context.js";
 import { ApiError } from "./errors.js";
 import { completionRoutes } from "./routes/completion.js";
 import { draftRoutes } from "./routes/draft.js";
 import { entryRoutes } from "./routes/entries.js";
 import { profileRoutes } from "./routes/profile.js";
-import { InvalidWeekIdError } from "../week.js";
+import { authRoutes } from "./routes/auth.js";
+import { syncRoutes } from "./routes/sync.js";
+import { yearRoutes } from "./routes/year.js";
+import { InvalidWeekIdError } from "../../shared/week.js";
 import { EntryFileError } from "../store/entryFiles.js";
 
 export async function buildApp(
@@ -62,6 +67,11 @@ export async function buildApp(
   draftRoutes(app, ctx);
   entryRoutes(app, ctx);
   completionRoutes(app, ctx);
+  yearRoutes(app, ctx);
+  if (options.sync) {
+    authRoutes(app, ctx, options.sync.auth);
+    syncRoutes(app, ctx, options.sync.engine);
+  }
 
   return { app, ctx };
 }

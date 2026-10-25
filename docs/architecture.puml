@@ -1,0 +1,51 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title The Unfiltered Journal — local-first weekly photo journal (container view)
+
+Person(user, "Journal owner", "Writes one entry per week — photos, reflection, private goals. Works fully offline.")
+
+System_Boundary(device, "The device — source of truth") {
+
+  Container(web, "Web app", "React 19 + Vite", "Profile, weekly composer, year grid, chapter view with owner goal checklist, login, sync badge")
+
+  Container_Boundary(local_backend, "Local backend — on-device app (Fastify :5174)") {
+    Component(api, "Journal API", "Fastify routes", "draft, entries, completion, profile, year — every write checks the week lock")
+    Component(authapi, "Auth + sync routes", "Fastify routes", "/api/auth/* session management, /api/sync/* status + kick")
+    Component(engine, "SyncEngine", "TypeScript", "Hash-dirty tracking; pull -> photo download -> photo upload -> push")
+    Component(auth, "AuthClient", "DevAuthClient / SupabaseAuthClient", "Dev JWT mint or GoTrue REST, env-selected")
+    Component(store, "Archive + index", "entryFiles / reindex", "Filesystem is the source of truth; SQLite is a rebuildable index")
+  }
+
+  ContainerDb(sqlite, "SQLite index", "better-sqlite3", "Rebuildable query index of the archive")
+  ContainerDb(files, "data/entries/<weekId>/", "filesystem", "entry.json, goals.json, progress.json, photos/, goal-photos/ — the real data")
+}
+
+System_Boundary(cloud, "Cloud mirror — never the source of truth") {
+
+  Container_Boundary(sync_server, "Sync API (Fastify :8787)") {
+    Component(syncroutes, "Sync routes", "Fastify + Zod", "POST /sync/push, GET /sync/pull?since=seq, PUT /sync/photos, GET /sync/media")
+    Component(verify, "verifyToken", "jose", "HS256/GoTrue JWT -> user_id; handlers never trust a supplied id")
+    Component(mirror, "Mirror store", "TypeScript", "Append-only apply; freeze rules; LWW on goal.completed_at")
+  }
+
+  ContainerDb(pg, "Postgres (Supabase)", "postgres", "users, entries, photos, goals, goal_completions — all scoped by user_id, ordered by sync_seq")
+  ContainerDb(bucket, "Object storage", "Supabase Storage / FsStorage (dev)", "Photo bytes, keyed <user_id>/<weekId>/photos/...")
+  ContainerDb(gotrue, "Supabase Auth (GoTrue)", "email/password", "Issues the JWT carried on every sync request")
+}
+
+Rel(user, web, "Reads + writes", "HTTPS")
+Rel(web, api, "journal reads/writes", "/api/*, /media/*")
+Rel(web, authapi, "auth + sync status", "/api/auth/*, /api/sync/*")
+Rel(api, store, "enforces lock rules, writes files", "")
+Rel(store, files, "read/write", "")
+Rel(store, sqlite, "reindex", "")
+Rel(engine, syncroutes, "push/pull + photo up/download", "Bearer JWT")
+Rel(auth, gotrue, "signUp/signIn/refresh", "HTTPS (prod)")
+Rel(syncroutes, verify, "authenticate", "")
+Rel(syncroutes, mirror, "applyPush / pull", "")
+Rel(mirror, pg, "INSERT ... ON CONFLICT", "SQL")
+Rel(syncroutes, bucket, "put/get bytes", "REST")
+
+@enduml

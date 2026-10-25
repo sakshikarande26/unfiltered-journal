@@ -1,5 +1,5 @@
 import type { EntryState, GoalDisclosure, WeekId } from "../shared/types.js";
-import { isLocked } from "./week.js";
+import { isLocked } from "../shared/week.js";
 
 /**
  * Entry state is derived, never stored. Nothing writes "locked" anywhere; the
