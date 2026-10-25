@@ -9,7 +9,7 @@ import type {
 import { emptyProgress } from "../../shared/types.js";
 import type { Db } from "../db/open.js";
 import { entryState } from "../state.js";
-import { isLocked, parseWeekId, weekIdAt } from "../week.js";
+import { isLocked, parseWeekId, weekIdAt } from "../../shared/week.js";
 import {
   readEntryFile,
   readGoalsFile,
@@ -26,6 +26,11 @@ export interface AppOptions {
   /** Injected so tests can stand on either side of Sunday 11:59pm without
    *  touching the system clock. Every lock decision reads this. */
   now?: () => Date;
+  /** Optional: absent in tests that exercise the archive alone. */
+  sync?: {
+    auth: import("../auth/client.js").AuthClient;
+    engine: import("../sync/engine.js").SyncEngine;
+  };
 }
 
 export interface Ctx {

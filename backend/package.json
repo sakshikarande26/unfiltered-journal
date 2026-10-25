@@ -1,0 +1,22 @@
+{
+  "name": "@tuj/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fastify/multipart": "^10.1.0",
+    "@fastify/static": "^10.1.2",
+    "@tuj/shared": "*",
+    "better-sqlite3": "^11.7.0",
+    "fastify": "^5.10.0",
+    "jose": "^6.0.0",
+    "luxon": "^3.5.0",
+    "sharp": "^0.35.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^22.10.5"
+  }
+}

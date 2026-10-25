@@ -37,6 +37,16 @@ function thumbUrl(weekId: WeekId, filename: string): string {
   return `/media/${weekId}/photos/thumbs/${filename}`;
 }
 
+/** The served URL for a photo file - grid covers and anywhere else a bare
+ *  filename needs to become a URL. */
+export function photoUrlOf(
+  weekId: WeekId,
+  filename: string,
+  thumb: boolean,
+): string {
+  return thumb ? thumbUrl(weekId, filename) : photoUrl(weekId, filename);
+}
+
 export function photoViews(weekId: WeekId, entry: EntryFile): PhotoView[] {
   return entry.photos.map((p, position) => ({
     position,

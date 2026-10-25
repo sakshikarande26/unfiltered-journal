@@ -23,6 +23,10 @@ export type ErrorCode =
   /** Disclosure is only offerable once at least one goal is completed. */
   | "DISCLOSURE_NOT_OFFERABLE"
   | "NOT_AN_IMAGE"
+  /** The archive is bound to a different account than the one signing in. */
+  | "ARCHIVE_OWNED"
+  /** Sign-in/sign-up failed against the auth provider. */
+  | "AUTH_FAILED"
   | "INVALID_BODY"
   | "INVALID_WEEK_ID";
 
@@ -38,6 +42,8 @@ const status: Record<ErrorCode, number> = {
   MAX_GOALS: 400,
   DISCLOSURE_NOT_OFFERABLE: 409,
   NOT_AN_IMAGE: 415,
+  ARCHIVE_OWNED: 409,
+  AUTH_FAILED: 401,
   INVALID_BODY: 400,
   INVALID_WEEK_ID: 400,
 };
