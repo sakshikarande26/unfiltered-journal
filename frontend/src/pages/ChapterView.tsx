@@ -7,6 +7,7 @@ import { ChapterHeader } from "../components/ChapterHeader.js";
 import { PhotoGallery } from "../components/PhotoGallery.js";
 import { ChapterProse } from "../components/ChapterProse.js";
 import { GoalsSummary } from "../components/GoalsSummary.js";
+import { GoalsChecklist } from "../components/GoalsChecklist.js";
 
 export function ChapterView() {
   const { weekId } = useParams<{ weekId: string }>();
@@ -25,6 +26,7 @@ export function ChapterView() {
           <ChapterHeader entry={entry} />
           <PhotoGallery photos={entry.photos} />
           <ChapterProse entry={entry} />
+          <GoalsChecklist weekId={weekId as WeekId} />
           <GoalsSummary goals={entry.goals} />
         </>
       )}

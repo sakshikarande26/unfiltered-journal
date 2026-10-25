@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root.js";
 import { ProfilePage } from "./pages/ProfilePage.js";
 import { ChapterView } from "./pages/ChapterView.js";
+import { ComposePage } from "./pages/ComposePage.js";
+import { YearPage } from "./pages/YearPage.js";
+import { LoginPage } from "./pages/LoginPage.js";
 import "./styles/tokens.css";
 import "./styles/app.css";
 
@@ -13,6 +16,9 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <ProfilePage /> },
       { path: "/chapters/:weekId", element: <ChapterView /> },
+      { path: "/compose", element: <ComposePage /> },
+      { path: "/year", element: <YearPage /> },
+      { path: "/login", element: <LoginPage /> },
     ],
   },
 ]);
